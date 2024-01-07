@@ -5,7 +5,9 @@ import (
 )
 
 var a int
+
 type hotdog int	// custom type
+
 var b hotdog
 
 func main() {
@@ -13,7 +15,13 @@ func main() {
 	b = 43
 	fmt.Println(a)	// 42
 	fmt.Printf("%T\n", a)	// int
+
 	fmt.Println(b)	// 43
 	fmt.Printf("%T\n", b)	// main.hotdog
+
 	// a = b	// error. different types
+	a = int(b)	// "CONVERSION". not CASTING
+	fmt.Println(a)	// 43
+	fmt.Printf("%T\n", a)	// int
+
 }
