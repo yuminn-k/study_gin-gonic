@@ -67,4 +67,13 @@ func main() {
 	fmt.Println(z)	// [42 0 0 0 0 0 0 0 0 999 3423]
 	fmt.Println(len(z))	// 11
 	fmt.Println(cap(z))	// 100
+
+	// MULTI-DIMENSIONAL SLICE
+	jb := []string{"James", "Bond", "Chocolate", "martini"}
+	fmt.Println(jb)	// [James Bond Chocolate martini]
+	mp := []string{"Miss", "Moneypenny", "Strawberry", "Hazelnut"}
+	fmt.Println(mp)	// [Miss Moneypenny Strawberry Hazelnut]
+
+	xp := [][]string{jb, mp}
+	fmt.Println(xp)	// [[James Bond Chocolate martini] [Miss Moneypenny Strawberry Hazelnut]]
 }
