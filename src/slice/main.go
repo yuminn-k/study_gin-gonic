@@ -27,4 +27,17 @@ func main() {
 	fmt.Println(x[:])		// [4 5 7 8 42]
 	fmt.Println(x[1:])	// [5 7 8 42]
 	fmt.Println(x[1:3])	// [5 7]
+
+	x = append(x, 77, 88, 99, 1014)	// append values to a slice
+
+	fmt.Println(x)	// [4 5 7 8 42 77 88 99 1014]
+
+	y := []int{234, 456, 678, 987}
+	x = append(x, y...)
+
+	fmt.Println(x)	// [4 5 7 8 42 77 88 99 1014 234 456 678 987]
+
+	x = append(x, y)
+
+	fmt.Println(x)	// [4 5 7 8 42 77 88 99 1014 234 456 678 987 [234 456 678 987]]
 }
