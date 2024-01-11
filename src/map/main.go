@@ -15,8 +15,6 @@ func main() {
 	fmt.Println(m["James"])	// 32
 	fmt.Println(m["Barnabas"])	// 0
 
-	
-
 	v, ok := m["Barnabas"]
 	fmt.Println(v)	// 0
 	fmt.Println(ok)	// false
@@ -29,4 +27,16 @@ func main() {
 	if v, ok := m["Miss Moneypenny"]; ok {
 		fmt.Println("THIS IS THE IF PRINT", v)	// THIS IS THE IF PRINT 27
 	}
+
+	// ADD TO MAP
+	m["todd"] = 33
+
+	for k, v := range m {
+		fmt.Println(k, v)
+	}
+	/*
+		todd 33
+		James 32
+		Miss Moneypenny 27
+	*/
 }
