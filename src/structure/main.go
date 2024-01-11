@@ -27,7 +27,7 @@ func main() {
 		age:   32,
 	}
 	// p2는 person 구조체의 인스턴스로, 필드 이름을 생략하고 값을 순서대로 초기화합니다.
-	p2 := person{"Miss", "Moneypenny", 27}
+	p2 := person{"Miss", "Moneypenny", 27}	// 비추천. 필드 이름을 생략하면 가독성이 떨어집니다.
 
 	// p1과 p2의 정보를 출력합니다.
 	fmt.Println(p1) // {James Bond 32}
