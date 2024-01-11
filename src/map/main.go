@@ -39,4 +39,20 @@ func main() {
 		James 32
 		Miss Moneypenny 27
 	*/
+
+	// DELETE FROM MAP
+	delete(m, "James")
+
+	fmt.Println(m)	// map[Miss Moneypenny:27 todd:33]
+
+	delete(m, "Ian Fleming")	// There isn't a key called "Ian Fleming". But, NO ERROR
+
+	fmt.Println(m["Ian Fleming"])	// 0
+
+	if v, ok := m["Miss Moneypenny"]; ok {
+		fmt.Println("value:", v)
+		delete(m, "Miss Moneypenny")
+	}
+
+	fmt.Println(m)	// map[todd:33]
 }
