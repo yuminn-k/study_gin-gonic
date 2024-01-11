@@ -46,4 +46,25 @@ func main() {
 	x = append(x[:2], x[4:]...)	// delete values from a slice
 
 	fmt.Println(x)	// [4 5 42 77 88 99 1014 234 456 678 987 [234 456 678 987]]
+
+	// MAKE
+	z := make([]int, 10, 100)	// make a slice of length 10 with underlying array of length 100
+
+	fmt.Println(z)	// [0 0 0 0 0 0 0 0 0 0]
+	fmt.Println(len(z))	// 10
+	fmt.Println(cap(z))	// 100
+
+	z[0] = 42
+	z[9] = 999
+
+	fmt.Println(z)	// [42 0 0 0 0 0 0 0 0 999]
+	fmt.Println(len(z))	// 10
+	fmt.Println(cap(z))	// 100
+
+	// z[10]	= 333	// index out of range
+	z = append(z, 3423)	// append value to slice
+
+	fmt.Println(z)	// [42 0 0 0 0 0 0 0 0 999 3423]
+	fmt.Println(len(z))	// 11
+	fmt.Println(cap(z))	// 100
 }
