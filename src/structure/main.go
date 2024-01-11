@@ -50,4 +50,17 @@ func main() {
 	// sa1의 person 필드와 ltk 값을 출력합니다.
 	// 임베딩된 구조체의 필드에 직접 접근이 가능합니다.
 	fmt.Println(sa1.person.first, sa1.first, sa1.last, sa1.age, sa1.ltk) // James something coll Bond 32 true
+
+	// Anonymous struct
+	// 구조체를 정의하지 않고, 필요한 필드만을 가지는 구조체를 생성할 수 있습니다.
+	anon := struct {
+		name string
+		age  int
+	}{
+		name: "Jane Doe",
+		age:  30,
+	}
+
+	// 익명 구조체의 필드를 출력합니다.
+	fmt.Println(anon.name, anon.age) // Jane Doe 30
 }
