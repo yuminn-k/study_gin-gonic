@@ -1,10 +1,14 @@
 package repositories
 
-import "gin-fleamarket/models"
+import (
+	"errors"
+	"gin-fleamarket/models"
+)
 
 // IItemRepository IItemRepository 인터페이스는 ItemMemoryRepository 구조체가 구현해야 하는 메서드를 정의한다.
 type IItemRepository interface {
-	FindAll() (*[]models.Item, error) // 모든 Item을 반환한다.
+	FindAll() (*[]models.Item, error)           // 모든 Item을 반환한다.
+	FindById(itemId uint) (*models.Item, error) // itemId에 해당하는 Item을 반환한다.
 }
 
 // ItemMemoryRepository ItemMemoryRepository 구조체는 IItemRepository 인터페이스를 구현한다.
@@ -20,4 +24,13 @@ func NewItemMemoryRepository(items []models.Item) IItemRepository {
 // FindAll FindAll() 메서드는 모든 Item을 반환한다.
 func (r *ItemMemoryRepository) FindAll() (*[]models.Item, error) {
 	return &r.items, nil
+}
+
+func (r *ItemMemoryRepository) FindById(itemId uint) (*models.Item, error) {
+	for _, v := range r.items {
+		if v.ID == itemId {
+			return &v, nil
+		}
+	}
+	return nil, errors.New("Item not found")
 }
