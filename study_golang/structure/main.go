@@ -4,63 +4,70 @@ import (
 	"fmt"
 )
 
-// person 구조체는 사람의 이름과 나이를 나타냅니다.
-type person struct {
-	first string // 이름
-	last  string // 성
-	age   int    // 나이
+// Person 구조체 정의
+// 구조체는 서로 다른 타입의 데이터를 하나로 묶어서 관리할 수 있게 해줍니다
+type Person struct {
+	name    string  // 이름
+	age     int     // 나이
+	address string  // 주소
 }
 
-// secretAgent 구조체는 person 구조체를 임베딩하여, 사람의 기본 정보 외에
-// 비밀 요원 여부를 나타내는 ltk 필드를 추가합니다.
-type secretAgent struct {
-	person // person 구조체를 임베딩하여 상속과 유사한 효과를 냅니다.
-	first  string
-	ltk    bool // 비밀 요원 여부 (License to Kill)
+// Employee 구조체는 Person을 포함(임베딩)합니다
+// Go에서는 상속 대신 구조체 임베딩을 통해 코드 재사용을 합니다
+type Employee struct {
+	Person          // Person 구조체를 임베딩
+	salary  int     // 급여
+	company string  // 회사명
 }
 
 func main() {
-	// p1은 person 구조체의 인스턴스로, 이름과 성, 나이 정보를 가집니다.
-	p1 := person{
-		first: "James",
-		last:  "Bond",
-		age:   32,
+	// 1. 구조체 인스턴스 생성 방법 1 - 필드명 명시
+	p1 := Person{
+		name:    "김철수",
+		age:     25,
+		address: "서울시",
 	}
-	// p2는 person 구조체의 인스턴스로, 필드 이름을 생략하고 값을 순서대로 초기화합니다.
-	p2 := person{"Miss", "Moneypenny", 27} // 비추천. 필드 이름을 생략하면 가독성이 떨어집니다.
 
-	// p1과 p2의 정보를 출력합니다.
-	fmt.Println(p1) // {James Bond 32}
-	fmt.Println(p2) // {Miss Moneypenny 27}
+	// 2. 구조체 인스턴스 생성 방법 2 - 필드 순서대로 값 입력
+	// 이 방법은 가독성이 떨어져서 추천하지 않습니다
+	p2 := Person{"홍길동", 30, "부산시"}
 
-	// p1의 각 필드를 개별적으로 출력합니다.
-	fmt.Println(p1.first, p1.last, p1.age) // James Bond 32
+	// 3. 구조체 포인터 생성
+	p3 := &Person{
+		name:    "이영희",
+		age:     28,
+		address: "인천시",
+	}
 
-	// sa1은 secretAgent 구조체의 인스턴스로, person 정보와 ltk 값을 가집니다.
-	sa1 := secretAgent{
-		person: person{
-			first: "James",
-			last:  "Bond",
-			age:   32,
+	// 4. 임베디드 구조체 생성
+	emp := Employee{
+		Person: Person{
+			name:    "박지민",
+			age:     35,
+			address: "대전시",
 		},
-		first: "something coll",
-		ltk:   true, // 비밀 요원 여부를 true로 설정합니다.
+		salary:  5000000,
+		company: "테크컴퍼니",
 	}
 
-	// sa1의 person 필드와 ltk 값을 출력합니다.
-	// 임베딩된 구조체의 필드에 직접 접근이 가능합니다.
-	fmt.Println(sa1.person.first, sa1.first, sa1.last, sa1.age, sa1.ltk) // James something coll Bond 32 true
+	// 구조체 필드 접근
+	fmt.Println("이름:", p1.name)           // 일반 구조체 필드 접근
+	fmt.Println("나이:", p2.age)            // 일반 구조체 필드 접근
+	fmt.Println("주소:", p3.address)        // 포인터 구조체도 동일하게 접근
+	
+	// 임베디드 구조체 필드 접근
+	// 임베디드 필드는 직접 접근 가능합니다
+	fmt.Println("직원 이름:", emp.name)      // Person의 필드 직접 접근
+	fmt.Println("직원 급여:", emp.salary)    // Employee 자체 필드 접근
 
-	// Anonymous struct
-	// 구조체를 정의하지 않고, 필요한 필드만을 가지는 구조체를 생성할 수 있습니다.
-	anon := struct {
-		name string
-		age  int
+	// 5. 익명 구조체 생성
+	// 한 번만 사용할 구조체는 익명으로 선언 가능합니다
+	temp := struct {
+		id   int
+		data string
 	}{
-		name: "Jane Doe",
-		age:  30,
+		id:   1,
+		data: "임시 데이터",
 	}
-
-	// 익명 구조체의 필드를 출력합니다.
-	fmt.Println(anon.name, anon.age) // Jane Doe 30
+	fmt.Println("임시 데이터:", temp.data)
 }
